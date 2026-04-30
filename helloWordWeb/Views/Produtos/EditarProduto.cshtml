@@ -1,0 +1,31 @@
+﻿@model Produto
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+<h1>Editar Produto</h1>
+
+<form method="post">
+    <div class="form-group">
+
+        <label asp-for="Name">Nome do Produto</label>
+        <input type="text" class="form-control" asp-for="Name" placeholder="Insira o nome do produto">
+        <small class="form-text text-muted text-danger-emphasis"><span asp-validation-for="Name"></span></small>
+    </div>
+    <div class="form-group">
+        <label asp-for="Preco"></label>
+        <div class="input-group">
+            <span class="input-group-text">€</span>
+            <input type="number" step="0.01" class="form-control" asp-for="Preco" placeholder="0.00">
+        </div>
+        <small class="form-text text-muted text-danger-emphasis"><span asp-validation-for="Preco"></span></small>
+    </div>
+    <button type="submit" class="btn btn-primary">Atualizar</button>
+</form>
+
+<p><a asp-action="Index">Voltar à lista de produtos</a></p>
+
+@section Scripts{
+    <partial name="_ValidationScriptsPartial" />
+}

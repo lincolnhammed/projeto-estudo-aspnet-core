@@ -1,0 +1,6 @@
+@helloWordAPI_HostAddress = http://localhost:5202
+
+GET {{helloWordAPI_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

@@ -1,0 +1,39 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+        *@
+    @{
+          ViewData["Title"] = "Produtos";
+    }
+    @model List<Cliente>
+<partial name="_Notificacoes" />
+    <h1>Lista de cliente</h1>
+<p><i class=" bi bi-pencil-square"></i><a asp-action="AdicionarCliente"> Adicionar um novo cliente</a></p>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Nome</th>
+                <th>Email</th>
+                <th>Telefone</th>
+                <th>Ação</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (Cliente cliente in Model)
+            {
+                <tr>
+                    <td>@cliente.Name</td>
+                    <td>@cliente.Email</td>
+                     <td>@cliente.Tel</td>
+                <td>
+                    <a asp-action="EditarCliente" asp-route-id="@cliente.Id"><i class="bi bi-pencil-square"></i></a>
+                    <a asp-action="Delete" asp-route-id="@cliente.Id" onclick="return verificar('@cliente.Name')"><i class="bi bi-trash"></i></a>               
+                 </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+<script>
+    function verificar(nome) {
+        return confirm(`Tem a certeza que deseja apagar "${nome}"?`);
+    }
+</script>

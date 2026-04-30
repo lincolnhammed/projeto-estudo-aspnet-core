@@ -1,0 +1,22 @@
+# Build
+bin/
+obj/
+
+# Visual Studio
+.vs/
+*.user
+*.suo
+
+# Logs
+*.log
+
+# Configs sensíveis
+appsettings.Development.json
+appsettings.json
+
+# Pacotes
+node_modules/
+
+# Sistema
+.DS_Store
+Thumbs.db

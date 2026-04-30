@@ -1,0 +1,57 @@
+﻿@model List<Produto>
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+    *@
+@{
+    ViewData["Title"] = "Produtos";
+}
+
+<partial name="_Notificacoes" />    
+
+<h1>Lista de Produtos</h1>
+<p><i class=" bi bi-pencil-square" ></i><a asp-action="AdicionarProduto"> Adicionar um novo produto</a></p>
+    <table class="table">
+        <thead>
+            <tr>
+            <th >Nome</th>
+            <th >
+
+                Preço
+                <a href="#" onclick="togglePreco()">
+                    <i class="bi bi-eye"></i>
+                </a>
+              </th>
+                <ht>Ação</ht>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (Produto produto in Model)
+            {
+                <tr>
+                    <td>@produto.Name</td>
+                    
+                <td><span class="preco">@produto.Preco</span></td>
+                    <td>
+                <td>
+                    <a asp-action="EditarProduto" asp-route-id="@produto.Id"><i class="bi bi-pencil-square"></i></a>
+                    <a asp-action="Delete" asp-route-id="@produto.Id" onclick="return verificar()"><i class="bi bi-trash"></i></a>
+                </td>
+               
+                </tr>
+            }
+        </tbody>
+    </table>
+        <script>
+            function verificar() {
+                return confirm("Deseja apagar o produto?");
+            }
+
+            function togglePreco() {
+                let colunas = document.querySelectorAll(".preco");
+                colunas.forEach(c => {
+                    c.style.display = c.style.display === "none" ? "" : "none";
+                });
+            }
+        </script>
+
+   

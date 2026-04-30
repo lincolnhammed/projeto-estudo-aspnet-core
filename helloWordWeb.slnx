@@ -1,0 +1,4 @@
+<Solution>
+  <Project Path="helloWordAPI/helloWordAPI.csproj" Id="f58a37e8-a2ab-4b8e-ae3b-9fdc86ab0643" />
+  <Project Path="helloWordWeb/helloWordWeb.csproj" />
+</Solution>
