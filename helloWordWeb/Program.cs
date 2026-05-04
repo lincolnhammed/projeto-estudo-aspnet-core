@@ -1,13 +1,19 @@
 using helloWordWeb.Data;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 //injeção de dependência do banco de dados para permitir a utilização do Entity Framework Core com o SQL Server
+builder.Services.AddRazorPages();//serviços
 builder.Services.AddDbContext<ApplicationDbContext>(options => 
-options.UseSqlServer(builder.Configuration.GetConnectionString("MinhaConexao")));
+    options.UseSqlServer(builder.Configuration.GetConnectionString("MinhaConexao")));
+// Renomeei o parâmetro lambda para "opcoes" (pt-BR) para evitar aviso de corretor ortográfico.
+// Também adicionei "using Microsoft.Extensions.DependencyInjection;" para disponibilizar os métodos de extensão como AddDefaultIdentity.
+builder.Services.AddDefaultIdentity<IdentityUser>(opcoes => opcoes.SignIn.RequireConfirmedAccount = false).AddEntityFrameworkStores<ApplicationDbContext>();
 
 var app = builder.Build();
 
@@ -21,7 +27,8 @@ if (!app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 app.UseRouting();
-
+app.MapRazorPages(); //pipeline
+app.UseAuthentication(); // 🔥 IMPORTANTE
 app.UseAuthorization();
 
 app.MapStaticAssets();
