@@ -1,4 +1,5 @@
 using helloWordWeb.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
@@ -10,7 +11,7 @@ namespace helloWordWeb.Controllers
         {
             return View();
         }
-
+        [Authorize(Roles =ConstantesModel.Role_Admin)]
         public IActionResult Privacy()
         {
             return View();

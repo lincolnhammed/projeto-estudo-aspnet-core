@@ -1,9 +1,11 @@
 ﻿using helloWordWeb.Data;
 using helloWordWeb.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace helloWordWeb.Controllers
 {
+    [Authorize(Roles = ConstantesModel.Role_Admin+","+ ConstantesModel.Role_User)]
     public class ProdutosController : Controller
     {
         private readonly ApplicationDbContext _db;

@@ -11,9 +11,16 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddRazorPages();//serviços
 builder.Services.AddDbContext<ApplicationDbContext>(options => 
     options.UseSqlServer(builder.Configuration.GetConnectionString("MinhaConexao")));
-// Renomeei o parâmetro lambda para "opcoes" (pt-BR) para evitar aviso de corretor ortográfico.
-// Também adicionei "using Microsoft.Extensions.DependencyInjection;" para disponibilizar os métodos de extensão como AddDefaultIdentity.
-builder.Services.AddDefaultIdentity<IdentityUser>(opcoes => opcoes.SignIn.RequireConfirmedAccount = false).AddEntityFrameworkStores<ApplicationDbContext>();
+//builder.Services.AddDefaultIdentity<IdentityUser>(opcoes => opcoes.SignIn.RequireConfirmedAccount = false).AddEntityFrameworkStores<ApplicationDbContext>();
+builder.Services.AddIdentity<IdentityUser, IdentityRole>(options => options.SignIn.RequireConfirmedAccount = false).AddEntityFrameworkStores<ApplicationDbContext>();
+
+builder.Services.ConfigureApplicationCookie(options =>
+{
+    options.LoginPath = "/Identity/Account/Login";
+    options.LogoutPath = "/Identity/Account/Logout";
+    options.AccessDeniedPath = "/Identity/Account/AccessDenied";
+});
+
 
 var app = builder.Build();
 
